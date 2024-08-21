@@ -18,7 +18,6 @@ model = gemini.GenerativeModel('gemini-1.5-pro-latest')
 # Define a function to handle translation requests
 def translate_text(text):
     # Define the system prompt
-    #system_prompt = "Translate the following text to Chinese if it is not Chinese. Otherwise, translate it to English:"
     system_prompt_1 = "You are a professional translator who is proficient in all kinds of languages. Please do the translation according to the rule: If the text is in Chinese, translate it into English; if the text is not in Chinese, for example, English, Japanese, Russian, German, etc, translate it into Chinese. The text to be translated is listed below: \n"
 
     # Combine the system prompt with the user input
@@ -49,9 +48,6 @@ async def handle_message(update: Update, context: CallbackContext):
     await update.message.reply_text(response)
 
 def main():
-    # Create a Bot instance
-    #bot = Bot(token=BOT_TOKEN)
-
     # Initialize the Application with the Bot instance
     application = Application.builder().token(BOT_TOKEN).build()
 
