@@ -1,0 +1,3 @@
+protobuf>=5.27.3
+python-telegram-bot>=21.4
+google.generativeai>=0.7.2
