@@ -79,14 +79,15 @@ def translate_text(text: str) -> str:
                 "HARM_CATEGORY_HARASSMENT": "block_none",
                 "HARM_CATEGORY_SEXUALLY_EXPLICIT": "block_none",
                 "HARM_CATEGORY_HATE_SPEECH": "block_none",
-                "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none",
+                "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none"
             }
         )
         logger.info("Text translation completed")
         return response.text
     except Exception as e:
-        logger.error(f"Text translation error: {str(e)}")
-        return "!!!Translation Failed!!!"
+        error_message = str(e)
+        logger.error(f"Text translation error: {error_message}")
+        return f"!!!Translation Failed!!!\nError: {error_message}"
 
 async def translate_image(image: Image.Image) -> str:
     """Handle image translation using Gemini Vision."""
@@ -100,14 +101,15 @@ async def translate_image(image: Image.Image) -> str:
                 "HARM_CATEGORY_HARASSMENT": "block_none",
                 "HARM_CATEGORY_SEXUALLY_EXPLICIT": "block_none",
                 "HARM_CATEGORY_HATE_SPEECH": "block_none",
-                "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none",
+                "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none"
             }
         )
         logger.info("Image translation completed")
         return response.text
     except Exception as e:
-        logger.error(f"Image translation error: {str(e)}")
-        return "!!!Image Translation Failed!!!"
+        error_message = str(e)
+        logger.error(f"Image translation error: {error_message}")
+        return f"!!!Image Translation Failed!!!\nError: {error_message}"
 
 async def handle_text(update: Update, context: CallbackContext) -> None:
     """Handle incoming text messages."""
@@ -138,8 +140,9 @@ async def handle_image(update: Update, context: CallbackContext) -> None:
         await update.message.reply_text(response)
         
     except Exception as e:
-        logger.error(f"Error handling image: {str(e)}")
-        await update.message.reply_text("Sorry, I couldn't process this image. Please try again.")
+        error_message = str(e)
+        logger.error(f"Error handling image: {error_message}")
+        await update.message.reply_text(f"Sorry, I couldn't process this image. Error: {error_message}")
 
 async def start_command(update: Update, context: CallbackContext) -> None:
     """Handle /start command."""

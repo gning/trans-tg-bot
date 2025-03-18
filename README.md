@@ -10,6 +10,13 @@ A Telegram bot that provides automatic translation services using Google's Gemin
 
 - **Image Translation**: Extracts and translates text from images using the same language rules
 
+- **Safety Settings**: The bot is configured to not block any content related to:
+  - Civic Integrity
+  - Harassment
+  - Sexually explicit content
+  - Hate speech
+  - Dangerous content
+
 ## Prerequisites
 
 - Python 3.8 or higher
@@ -61,7 +68,11 @@ The bot logs its activities to `trans_bot.log` in the same directory.
 ## Security Notes
 
 - Never commit your `.env` file to version control
-- The bot is configured to bypass content filtering with Gemini's safety settings, but be aware of potential misuse
+- The bot is configured to bypass all content filtering with Gemini's safety settings, including:
+  - Civic Integrity content: The bot will translate text related to elections, civic processes, etc.
+  - Harassment, hate speech, sexually explicit, and dangerous content
+- Be aware of potential misuse and ensure compliance with applicable laws when using the bot
+- You are responsible for how the bot is used and any content it processes or generates
 
 ## Customization
 
