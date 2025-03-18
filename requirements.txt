@@ -1,3 +1,6 @@
 protobuf>=5.27.3
 python-telegram-bot>=21.4
-google.generativeai>=0.7.2
+google-generativeai>=0.7.2
+pillow>=10.2.0
+requests>=2.31.0
+python-dotenv>=1.0.1

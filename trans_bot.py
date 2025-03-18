@@ -6,6 +6,10 @@ import os
 from PIL import Image
 import requests
 from io import BytesIO
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Set up logging
 logging.basicConfig(
@@ -16,16 +20,27 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Configuration
-BOT_TOKEN = "<your-Telegram-Bot-Token>"
-GEMINI_API_KEY = "<your-Gemini-API-Key>"
+# Configuration from environment variables
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+TEXT_MODEL_NAME = os.getenv("TEXT_MODEL_NAME", "gemini-exp-1206")
+VISION_MODEL_NAME = os.getenv("VISION_MODEL_NAME", "gemini-exp-1206")
+
+# Check if required environment variables are set
+if not BOT_TOKEN:
+    logger.error("BOT_TOKEN not found in environment variables")
+    raise ValueError("BOT_TOKEN environment variable is required")
+    
+if not GEMINI_API_KEY:
+    logger.error("GEMINI_API_KEY not found in environment variables")
+    raise ValueError("GEMINI_API_KEY environment variable is required")
 
 # Initialize Gemini API
 gemini.configure(api_key=GEMINI_API_KEY)
 
 # Initialize models
-text_model = gemini.GenerativeModel('gemini-exp-1206')
-vision_model = gemini.GenerativeModel('gemini-exp-1206')
+text_model = gemini.GenerativeModel(TEXT_MODEL_NAME)
+vision_model = gemini.GenerativeModel(VISION_MODEL_NAME)
 
 def get_translation_prompt(is_image=False):
     """Returns the appropriate translation prompt based on input type."""
